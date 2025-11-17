@@ -1,7 +1,11 @@
 import Header from "@/modules/layout/components/header";
+import { initializeWorkspace } from "@/modules/workspace/actions";
 
 const RootLayout = async({children}:{children:React.ReactNode}) => {
     
+  const workspace = await initializeWorkspace();
+  console.log('user is layout',JSON.stringify(workspace));
+
   return (
     <>
     
