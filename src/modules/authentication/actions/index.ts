@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
-import prisma from "@/lib/db"
+import { prisma } from "@/lib/db"
+
 import { headers } from "next/headers"
 
 export const currentUser = async()=>{
