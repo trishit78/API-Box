@@ -92,5 +92,5 @@ export const getWorkspaceById = async(id:string)=>{
             members:true
         }       
     });
-    return workspace
+    return workspace;
 }
