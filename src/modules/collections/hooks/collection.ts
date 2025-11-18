@@ -2,10 +2,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createCollection, deleteCollection, editCollection, getCollections } from "../actions";
 
 
-export function useCollections(workspaceId:string){
+export function useCollections(workspaceId?:string){
     return useQuery({
         queryKey:["collection",workspaceId],
-        queryFn:async()=>getCollections(workspaceId)
+        queryFn:async()=>getCollections(workspaceId!),
+        enabled: !!workspaceId,
     })
 }
 
