@@ -8,6 +8,7 @@ import DeleteCollectionModal from "./deleteCollection";
 import SaveRequestToCollectionModal from "../addRequestModal";
 import { useGetAllRequestFromCollection } from "@/modules/request/hooks/request";
 import { REST_METHOD } from "@/generated/prisma/enums";
+import { useRequestPlaygroundStore } from "@/modules/request/store/useRequestStore";
 
 
 
@@ -41,6 +42,8 @@ const CollectionFolder = ({collection}:Props) => {
     };
  
     const hasRequests = requestData && requestData.length > 0;
+
+    const {openRequestTab} = useRequestPlaygroundStore()
 
     return (
     <>
@@ -144,7 +147,7 @@ const CollectionFolder = ({collection}:Props) => {
                 {requestData.map((request: any) => (
                   <div
                     key={request.id}
-                    // onClick={() => openRequestTab(request)}
+                     onClick={() => openRequestTab(request)}
                     className="flex items-center justify-between py-2 px-3 hover:bg-zinc-900/50 rounded-md cursor-pointer group transition-colors"
                   >
                     <div className="flex items-center space-x-3 flex-1">
