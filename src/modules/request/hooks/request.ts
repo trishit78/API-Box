@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addRequestToCollection, getAllRequestFromCollection, Request, saveRequest } from "../actions";
+import { addRequestToCollection, getAllRequestFromCollection, Request, run, saveRequest } from "../actions";
 import { useRequestPlaygroundStore } from "../store/useRequestStore";
 
 
@@ -7,12 +8,13 @@ import { useRequestPlaygroundStore } from "../store/useRequestStore";
 export function useAddRequestToCollection(collectionId:string){
     const queryClient = useQueryClient();
 
+    const { updateTabFromSavedRequest, activeTabId } = useRequestPlaygroundStore();
 
     return useMutation({
         mutationFn:async(value:Request)=> addRequestToCollection(collectionId,value),
-        onSuccess:(data)=> {
+        onSuccess:(data:any)=> {
             queryClient.invalidateQueries({queryKey:["requests",collectionId]})
-            console.log(data)
+            updateTabFromSavedRequest(activeTabId!, data);
         }
     })
 }
@@ -26,12 +28,29 @@ export function useGetAllRequestFromCollection(collectionId:string){
 
 export function useSaveRequest(id:string){
     const queryClient = useQueryClient();
+    const { updateTabFromSavedRequest, activeTabId } = useRequestPlaygroundStore();
     return useMutation({
         mutationFn:async(value:Request)=>saveRequest(id,value),
-        onSuccess:(data)=>{
+        onSuccess:(data:any)=>{
             queryClient.invalidateQueries({queryKey:["requests"]});
-            
+    updateTabFromSavedRequest(activeTabId!,data)          
     
+        }
+    })
+}
+
+
+
+export function useRunRequest(requestId:string){
+    const queryClient = useQueryClient();
+    const {setResponseViewerData} = useRequestPlaygroundStore();
+
+
+    return useMutation({
+        mutationFn:async()=> await run(requestId),
+        onSuccess:(data:any)=>{
+            queryClient.invalidateQueries({queryKey:["requests"]});
+            setResponseViewerData(data)
         }
     })
 }
