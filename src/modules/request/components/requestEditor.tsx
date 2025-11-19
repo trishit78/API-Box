@@ -6,11 +6,16 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import RequestEditorArea from "./requestEditorArea";
+import { useRunRequest } from "../hooks/request";
+import { toast } from "sonner";
+import ResponseViewer from "./ResponseViewer";
 
 
 export default function RequestEditor() {
-  const { tabs, activeTabId, updateTab} = useRequestPlaygroundStore();
+  const { tabs, activeTabId, updateTab,responseViewerData} = useRequestPlaygroundStore();
   const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+  const {mutateAsync,isPending} = useRunRequest(activeTab?.requestId!)
 
  const requestColorMap: Record<string, string> = {
     GET: "text-green-500",
@@ -21,6 +26,15 @@ export default function RequestEditor() {
 
  
   if (!activeTab) return null;
+
+  const onSendRequest = async()=>{
+    try {
+        const res = await mutateAsync();
+        toast.success("Request sent successfully")
+    } catch (error) {
+        toast.error("Failed to send request");
+    }
+  }
 
   return (
    <div className="flex flex-col items-center justify-start py-4 px-4">
@@ -54,6 +68,8 @@ export default function RequestEditor() {
       <Button 
       type='submit'
         className="ml-2 text-white  font-bold bg-indigo-500 hover:bg-indigo-600"
+       onClick={onSendRequest}
+        disabled={isPending || !activeTab.url}
       >
         <Send className="mr-2" />
         Send
@@ -64,6 +80,9 @@ export default function RequestEditor() {
         <RequestEditorArea tab={activeTab} updateTab={updateTab} ></RequestEditorArea>
 
      </div>
+     {
+        responseViewerData && <ResponseViewer responseData={responseViewerData}/>
+     }
       
    </div>
   );
