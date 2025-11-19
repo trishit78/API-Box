@@ -1,10 +1,17 @@
 import Header from "@/modules/layout/components/header";
 import { initializeWorkspace } from "@/modules/workspace/actions";
+import { redirect } from "next/navigation";
+
+export const dynamic = 'force-dynamic';
 
 const RootLayout = async({children}:{children:React.ReactNode}) => {
     
   const workspace = await initializeWorkspace();
   console.log('user is layout',JSON.stringify(workspace));
+  if(!workspace.success || !workspace.workspace){
+    redirect('/sign-in');
+  }
+
 
   return (
     <>

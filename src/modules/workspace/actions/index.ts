@@ -38,7 +38,7 @@ export const initializeWorkspace = async()=>{
             }
         });
         return {
-            sucess:true,
+            success:true,
             workspace
         }
     } catch (error) {
