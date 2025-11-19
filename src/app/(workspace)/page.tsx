@@ -11,11 +11,7 @@ export const dynamic = 'force-dynamic';
 
 const Page = ()=>{
   const {selectedWorkspace} = useWorkspaceStore();
-
-
   const workspaceId = selectedWorkspace?.id;
-  
-
   const {data:currentWorkspace,isPending} = useGetWorkspace(workspaceId);
   
   if(isPending || !workspaceId){
