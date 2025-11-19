@@ -7,8 +7,8 @@ import { toast } from "sonner";
 import { useAddRequestToCollection } from "@/modules/request/hooks/request";
 import { Button } from "@/components/ui/button";
 import { REST_METHOD } from "@/generated/prisma/enums";
-import { useWorkspaceStore } from "../layout/store";
-import { useCollections } from "./hooks/collection";
+import { useWorkspaceStore } from "../../layout/store";
+import { useCollections } from "../hooks/collection";
 import Modal from "@/components/modal";
 
 

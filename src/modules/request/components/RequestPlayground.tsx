@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Unplug } from "lucide-react";
 import { useSaveRequest } from "../hooks/request";
 import { REST_METHOD } from "@/generated/prisma/enums";
-import SaveRequestToCollectionModal from "@/modules/collections/addRequestModal";
+import SaveRequestToCollectionModal from "@/modules/collections/store/addRequestModal";
 import TabBar from "./tabBar";
 import RequestEditor from "./requestEditor";
 

@@ -34,6 +34,7 @@ const Modal: React.FC<ModalProps> = ({
   submitText = 'Submit',
   cancelText = 'Cancel',
   showFooter = true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   submitVariant = "default",
   size,
   className = ''

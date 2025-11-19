@@ -8,11 +8,8 @@ import Workspace from './workspace'
 
 
 
-interface Props {
-  workspace: WorkspaceProps
-}
 
-const Header = ({ workspace }: Props) => {
+const Header = () => {
 const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -37,7 +34,7 @@ const [user, setUser] = useState(null);
       <div className='col-span-2 flex items-center justify-end space-x-2 hover:cursor-pointer hover:opacity-80'>
          <InviteMember />
         
-        <Workspace workspace={workspace} /> 
+        <Workspace  /> 
         <UserButton user={user} size='sm' />
       </div>
     </header>

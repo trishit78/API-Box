@@ -7,6 +7,7 @@ import RequestPlayground from "@/modules/request/components/RequestPlayground";
 import { useGetWorkspace } from "@/modules/workspace/hooks/workspace";
 import { Loader } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
 
 const Page = ()=>{
   const {selectedWorkspace} = useWorkspaceStore();

@@ -5,7 +5,7 @@ import { ChevronDown, ChevronRight, Edit, EllipsisVertical, FilePlus, Folder, Tr
 import { useState } from "react";
 import EditCollectionModal from "./editCollection";
 import DeleteCollectionModal from "./deleteCollection";
-import SaveRequestToCollectionModal from "../addRequestModal";
+import SaveRequestToCollectionModal from "../store/addRequestModal";
 import { useGetAllRequestFromCollection } from "@/modules/request/hooks/request";
 import { REST_METHOD } from "@/generated/prisma/enums";
 import { useRequestPlaygroundStore } from "@/modules/request/store/useRequestStore";
