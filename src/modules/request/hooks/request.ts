@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addRequestToCollection, getAllRequestFromCollection, Request, saveRequest } from "../actions";
+import { useRequestPlaygroundStore } from "../store/useRequestStore";
 
 
 
@@ -25,12 +26,12 @@ export function useGetAllRequestFromCollection(collectionId:string){
 
 export function useSaveRequest(id:string){
     const queryClient = useQueryClient();
-    
     return useMutation({
         mutationFn:async(value:Request)=>saveRequest(id,value),
         onSuccess:(data)=>{
             queryClient.invalidateQueries({queryKey:["requests"]});
-            console.log(data)
+            
+    
         }
     })
 }

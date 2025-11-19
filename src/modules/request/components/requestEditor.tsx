@@ -5,6 +5,7 @@ import { useRequestPlaygroundStore } from "../store/useRequestStore";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
+import RequestEditorArea from "./requestEditorArea";
 
 
 export default function RequestEditor() {
@@ -46,7 +47,7 @@ export default function RequestEditor() {
           value={activeTab.url || ''} 
           onChange={(e) => updateTab(activeTab.id, { url: e.target.value })}
           placeholder="Enter URL"
-          className="flex-1"
+          className="flex-1 text-white"
         />
       </div>
       
@@ -60,7 +61,8 @@ export default function RequestEditor() {
     </div>
 
      <div className="flex flex-1 flex-col w-full justify-start mt-4 items-center ">
-      
+        <RequestEditorArea tab={activeTab} updateTab={updateTab} ></RequestEditorArea>
+
      </div>
       
    </div>

@@ -2,6 +2,7 @@
 import { X } from "lucide-react";
 import { useState } from "react";
 import { useRequestPlaygroundStore } from "../store/useRequestStore";
+import AddNameModal from "./addNameModela";
 
 
 export default function TabBar() {
@@ -67,6 +68,14 @@ export default function TabBar() {
           +
         </button>
       </div>
+
+       {selectedTabId && (
+        <AddNameModal
+          isModalOpen={renameModalOpen}
+          setIsModalOpen={setRenameModalOpen}
+          tabId={selectedTabId}
+        />
+      )}
     </>
   );
 }
