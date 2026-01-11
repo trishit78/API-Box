@@ -7,21 +7,24 @@ import { PrismaClient } from "@/generated/prisma/client";
 
 const prisma = new PrismaClient();
 
-
 export const auth = betterAuth({
-    database: prismaAdapter(prisma, {
-        provider: "postgresql", // or "mysql", "postgresql", ...etc
-    }),
-    socialProviders:{
-        github:{
-            clientId:env.GITHUB_CLIENT_ID,
-            clientSecret:env.GITHUB_CLIENT_SECRET
-        },
+  database: prismaAdapter(prisma, {
+    provider: "postgresql", // or "mysql", "postgresql", ...etc
+  }),
+  cookies: {
+    secure: true,
+    sameSite: "lax",
+  },
 
-        google:{
-            clientId:env.GOOGLE_CLIENT_ID,
-            clientSecret:env.GOOGLE_CLIENT_SECRET
-        }
-    }
+  socialProviders: {
+    github: {
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+    },
+
+    google: {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    },
+  },
 });
-
